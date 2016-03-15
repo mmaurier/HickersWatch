@@ -107,7 +107,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             List<Address> listAddress = geocoder.getFromLocation(lat,lng,1);
             if (listAddress != null && listAddress.size() > 0 ){
                 Log.i("placeinfo", listAddress.get(0).toString());
-                infTextView.setText(listAddress.get(0).toString());
+                String addressHolder = null;
+                for (int i = 0; i <= listAddress.get(0).getMaxAddressLineIndex(); i++) {
+                    addressHolder += listAddress.get(0).getAddressLine(i) + "\r\n";
+                }
+                infTextView.setText(addressHolder);
             }
         } catch (IOException e) {
             e.printStackTrace();
